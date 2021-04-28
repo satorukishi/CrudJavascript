@@ -1,0 +1,128 @@
+*{margin: 0; padding: 0;}
+
+body{
+    font-family: arial, helvetica, sans-serif;
+    font-size: 12px;
+    margin: 0px;
+}
+
+main {
+    padding-top: 200px;
+}
+
+.cabecalho { 
+    text-align: center;
+}
+.logo {
+    height: 100px;
+}
+.avatar {
+    height: 75px;
+}
+.icone {
+    height: 20px;
+    padding-right: 5px;
+}
+
+footer{
+    /* float:inline-end;
+    background-color:#eee5dc;
+    position: absolute;
+	bottom: 0px; */
+    height: 50px;
+    width: 100%;
+}
+
+#logo {
+	position: absolute; 
+	left: 20px; 
+	top: 10px; 
+}
+
+
+#user_icon {
+    border:none;
+    float: right;
+    left: 100%;
+    padding:0;
+    margin:0
+    }
+
+
+.menu{
+    list-style:none;
+    /* border:10px solid #eee5dc; */
+    float:right;
+    width: 100%; 
+    height: 40px; 
+    margin-right: 0px;
+    margin-top: 50px;
+    z-index: 999;
+    position: relative;
+}
+
+.menu li{
+    color:rgb(235, 149, 36);
+    position:relative;
+    float:left;
+    border-right:1px solid #eee5dc;
+    padding:0 0;
+    list-style:none;
+    display:inline;
+    position:relative;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.menu li a{
+    color:rgb(235, 149, 36); 
+    text-decoration:none; 
+    padding:10px 10px; 
+    display:block;
+    line-height: 40px;
+    padding: 0 14px;
+    text-decoration: none;
+}
+
+.menu li a:hover{
+background:rgb(235, 149, 36);
+color:#fff;
+/*-moz-box-shadow:0 3px 10px 0 #CCC;*/
+/*-webkit-box-shadow:0 3px 10px 0 #ccc;*/
+text-shadow:0px 0px 5px #fff;
+-webkit-transition: all .1s ease-in-out;
+-moz-transition: all .1s ease-in-out;
+-ms-transition: all .1s ease-in-out;
+-o-transition: all .1s ease-in-out;
+transition: all .1s ease-in-out;
+}
+
+.menu li  ul{
+    position:absolute;
+    top:15px;
+    left:0;
+    background-color:#fff;
+    display:none;
+    margin: auto;
+    padding: 0 0;   
+    list-style:none;
+}
+
+.menu li:hover ul, .menu li.over ul{display:block;}
+.menu li ul li{
+    border:1px solid #c0c0c0;
+    display:block;
+    width:150px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+@media screen and (max-width: 1024px){
+    #menu{position:relative;}
+    #menu ul{background:#111;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none}
+    #menu ul.menus{width:100%;position:static;padding-left:20px}
+    #menu li{display:block;float:none;width:auto; font:normal 0.8em Arial;}
+    #menu input,#menu label{position:absolute;top:0;left:0;display:block}
+    #menu input{z-index:4}
+    #menu input:checked + label{color:white}
+    #menu input:checked ~ ul{display:block}
+}   
