@@ -8,19 +8,6 @@ class Produto {
         this.validade = validade;
     }
 
-    // get id() {
-    //     return this.id;
-    // }
-    // get nome() {
-    //     return this.nome;
-    // }
-    // get preco() {
-    //     return this.preco;
-    // }
-    // get validade() {
-    //     return this.validade;
-    // }
-
     create() {
         Produto.lastIndex++;
         this.id = Produto.lastIndex;
@@ -28,10 +15,10 @@ class Produto {
     }
 
     static read(id) {
-        return produtos.filter(x => x.id === id);
+        return produtos.filter(x => x.id == id)[0];
     }
 
-    readAll(){
+    static readAll(){
         return produtos;
     }
 
@@ -41,8 +28,8 @@ class Produto {
         this.validade = validade;
     }
 
-    delete(id) {
-        produtos = produtos.filter(x => x.id !== id);
+    static delete(id) {
+        produtos = produtos.filter(x => x.id != id);
     }
 }
 Produto.lastIndex = 0;

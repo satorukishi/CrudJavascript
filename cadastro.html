@@ -24,10 +24,11 @@
         <div>
             <form name="frmMercadoria" action="#">
                 <input type="hidden" id="valId" />
-                <div><input placeholder="Nome" type="text" id="txtNome" min="1" max="60" required value="Danoninho" /></div>
+                <div><input placeholder="Nome" type="text" id="txtNome" min="1" max="60" required value="" />
+                </div>
                 <div><input placeholder="Pre&ccedil;o" type="number" id="txtPreco" min="0.05" max="6" step=".01"
-                        required value="2.6" /></div>
-                <div><input placeholder="Validade" type="date" id="txtValidade" required value="2021-12-31" /></div>
+                        required value="" /></div>
+                <div><input placeholder="Validade" type="date" id="txtValidade" required value="" /></div>
                 <div><input type="button" onclick="addMercadoria()" value="Cadastar" /></div>
             </form>
         </div>
@@ -46,7 +47,6 @@
         var dtMercadoria = null;
         $(document).ready(function () {
             carregaTabela();
-            exibeTabela();
         });
 
         function addMercadoria() {
@@ -54,7 +54,7 @@
             var txtNome = document.getElementById("txtNome")
             var txtPreco = document.getElementById("txtPreco")
             var txtValidade = document.getElementById("txtValidade")
-            
+
 
             if (valId.value == "") {
                 var p = new Produto(valId.value, txtNome.value, txtPreco.value, txtValidade.value)
@@ -64,6 +64,32 @@
                 p.update(txtNome.value, txtPreco.value, txtValidade.value)
             }
 
+            // carregaTabela();
+            exibeTabela();
+            limpaCampos();
+        }
+
+        function limpaCampos() {
+            document.getElementById("valId").value = "";
+            document.getElementById("txtNome").value = "";
+            document.getElementById("txtPreco").value = "";
+            document.getElementById("txtValidade").value = "";
+        }
+
+        function editMercadoria(id) {
+            var p = Produto.read(id)
+
+            document.getElementById("valId").value = p.id;
+            document.getElementById("txtNome").value = p.nome;
+            document.getElementById("txtPreco").value = p.preco;
+            document.getElementById("txtValidade").value = p.validade;
+        }
+
+        function delMercadoria(id) {
+            if (confirm("Deseja excluir o produto " + Produto.read(id).nome + "?")) {
+                Produto.delete(id);
+            }
+
             exibeTabela();
         }
 
@@ -71,16 +97,23 @@
             dtMercadoria = $('#tblMercadoria').DataTable({
                 data: produtos,
                 columns: [
-                    { title: "Id" },
-                    { title: "Nome" },
-                    { title: "Preço" },
-                    { title: "Validade" },
+                    {
+                        title: "Ações", data: "id", render: function (data, type, row) {
+                            return "<img id='btnEditar' onclick='editMercadoria(" + data + ")' src='img/icoEditar.png' class='icone' />" +
+                                "<img id='btnExcluir' onclick='delMercadoria(" + data + ")' src='img/icoExcluir.png' class='icone' />"
+                        }
+                    },
+                    // { title: "Id", data: "id" },
+                    { title: "Nome", data: "nome" },
+                    { title: "Preço", data: "preco" },
+                    { title: "Validade", data: "validade" },
                 ]
             });
         }
 
         function exibeTabela() {
-            dtMercadoria.invalidate().draw();
+            dtMercadoria.clear();
+            dtMercadoria.rows.add(produtos).draw();
         }
     </script>
 </body>
